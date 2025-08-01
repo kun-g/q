@@ -63,7 +63,8 @@ aws --version
 ## 构建信息
 
 - 基础镜像：Ubuntu 22.04
-- 支持架构：linux/amd64, linux/arm64
+- 支持架构：linux/arm64
+- Amazon Q CLI：使用 ZIP 包安装到 ~/.local/bin
 - 自动构建：通过 GitHub Actions 触发
 
 ## 扩展使用

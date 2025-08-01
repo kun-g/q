@@ -20,17 +20,16 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# 下载并安装 Amazon Q CLI
+# 安装 Amazon Q CLI (ARM64)
 RUN curl --proto '=https' --tlsv1.2 -sSf \
-    https://desktop-release.q.us-east-1.amazonaws.com/latest/amazon-q.deb \
-    -o /tmp/amazon-q.deb \
-    && apt-get update \
-    && apt-get install -y /tmp/amazon-q.deb \
-    && rm /tmp/amazon-q.deb \
-    && rm -rf /var/lib/apt/lists/*
+    "https://desktop-release.q.us-east-1.amazonaws.com/latest/q-aarch64-linux.zip" \
+    -o /tmp/q.zip \
+    && unzip /tmp/q.zip -d /tmp/q \
+    && /tmp/q/install.sh --no-confirm \
+    && rm -rf /tmp/q.zip /tmp/q
 
-# 安装 AWS CLI v2
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" \
+# 安装 AWS CLI v2 (ARM64)
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "/tmp/awscliv2.zip" \
     && unzip /tmp/awscliv2.zip -d /tmp \
     && /tmp/aws/install \
     && rm -rf /tmp/aws /tmp/awscliv2.zip
@@ -44,7 +43,7 @@ WORKDIR /workspace
 
 # 设置环境变量
 ENV Q_LOG_LEVEL=info
-ENV PATH="/usr/local/bin:${PATH}"
+ENV PATH="/root/.local/bin:/usr/local/bin:${PATH}"
 
 # 设置默认命令
 CMD ["/bin/bash"]
