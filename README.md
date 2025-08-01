@@ -27,14 +27,14 @@ q login --license free
 ```bash
 # 基础用法
 docker run -it --rm \
-  -v ~/.aws:/root/.aws \
-  -v $(pwd):/workspace \
+  -v ~/.aws:/home/quser/.aws \
+  -v $(pwd):/home/quser/workspace \
   ghcr.io/你的用户名/q:latest
 
 # 交互式使用
 docker run -it --rm \
-  -v ~/.aws:/root/.aws \
-  -v $(pwd):/workspace \
+  -v ~/.aws:/home/quser/.aws \
+  -v $(pwd):/home/quser/workspace \
   ghcr.io/你的用户名/q:latest bash
 ```
 
@@ -50,9 +50,9 @@ aws --version
 
 ## 目录结构
 
-- `/root/.aws/amazonq/` - Amazon Q 全局配置目录
-- `/workspace/.amazonq/` - 工作空间配置目录
-- `/workspace` - 默认工作目录
+- `/home/quser/.aws/amazonq/` - Amazon Q 全局配置目录
+- `/home/quser/.amazonq/` - 工作空间配置目录
+- `/home/quser/workspace` - 默认工作目录
 
 ## 环境变量
 
