@@ -37,7 +37,7 @@ RUN ARCH=$(uname -m) \
             "https://desktop-release.q.us-east-1.amazonaws.com/latest/q-aarch64-linux.zip" \
             -o /tmp/q.zip \
         && unzip /tmp/q.zip -d /tmp \
-        && /tmp/q/install.sh --no-confirm \
+        && /tmp/q/install.sh --no-confirm --force \
         && rm -rf /tmp/q.zip /tmp/q; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
