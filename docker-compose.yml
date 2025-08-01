@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  amazon-q:
+    build: .
+    image: amazon-q-base:local
+    container_name: amazon-q-cli
+    volumes:
+      - ~/.aws:/root/.aws:ro  # 只读挂载认证信息
+      - .:/workspace          # 挂载当前目录到工作空间
+    working_dir: /workspace
+    environment:
+      - Q_LOG_LEVEL=info
+    tty: true
+    stdin_open: true
+    command: bash
+
+  # 用于开发和测试的服务
+  amazon-q-dev:
+    extends: amazon-q
+    container_name: amazon-q-dev
+    volumes:
+      - ~/.aws:/root/.aws:ro
+      - .:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock  # 支持容器内使用 Docker
+    environment:
+      - Q_LOG_LEVEL=debug
+    command: bash
